@@ -15,8 +15,10 @@
         <div>
           <input id="show-listings" type="button" value="Marcadores">
           <input id="hide-listings" type="button" value="Esconder Marcadores">
-          <input id="user-input" data-bind="value: nomeCliente">
+
+          <input id="search" type="search" name="search" placeholder="Pesquisa por clientes" data-bind="value: query, valueUpdate: 'keyup'" autocomplete="off" />
           <button id="search-input"> Mostrar </button>
+          <input id="user-input" data-bind="value: nomeCliente">
           <button id="info-input" data-bind="click: loadData"> Info </button>
           <hr>
         </div>
@@ -25,26 +27,24 @@
     <div class="caixa">
       <div class="wikipedia-container">
           <h3 id="wikipedia-header">Wikipedia links sobre clientes.</h3>
-          <ul id="wikipedia-links">Escolha o nome de um dos clientes na caixa e click info.</ul>
-          <ul id="referenciaMobile" data-bind="foreach: clientes">
-            <li>
-                <h5 data-bind="text: title"></h5>
-            </li>
-          </ul>
+          <nav>
+            <ul id="wikipedia-links">Escolha o nome de um dos clientes na caixa e click info.</ul>
+          </nav>
       </div>
     </div>
       <div>
-        <ul  id="listaClientes" data-bind="foreach: clientes">
-          <div class="caixaClientes">
-            <li>
-              <h3 data-bind="text: title"></h3>
-              <p data-bind="text: desc"></p>
-              <p data-bind="text: end"></p>
-              <p data-bind="text: cel"></p>
-              <p data-bind="text: tel"></p>
-            </li>
-          </div>
-        </ul>
+        <nav id="clientesBox">
+          <ul  id="listaClientes" class="caixaClientes" data-bind="template: {foreach:clientes}">
+              <li>
+                <h3 data-bind="text: name"></h3>
+                <p data-bind="text: desc"></p>
+                <p data-bind="text: end"></p>
+                <p data-bind="text: cel"></p>
+                <p data-bind="text: tel"></p>
+                <hr>
+              </li>
+          </ul>
+        <nav>
       </div>
       <div id="map"></div>
     </div>
@@ -172,6 +172,7 @@
         document.getElementById('show-listings').addEventListener('click', showListings);
         document.getElementById('hide-listings').addEventListener('click', hideListings);
         document.getElementById('search-input').addEventListener('click', mostrarCliente);
+        showListings();
       }
 
       //Completa a Janela de marcador com informações se disponiveis.
@@ -232,7 +233,7 @@
 
       //Adiciona um marcador especifico do cliente selecionado pelo usuário.
       function mostrarCliente() {
-        var nome = document.getElementById('user-input').value;
+        var nome = document.getElementById('search').value;
         var todosClientes = locations;
         hideListings();
         for(var i = 0; i < todosClientes.length; i++){

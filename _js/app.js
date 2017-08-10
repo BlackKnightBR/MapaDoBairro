@@ -1,60 +1,75 @@
-//Aplicando a bibloteca knockout.js e suas práticas.
-function AppViewModel(){
-  //Área de dados.
-  this.nomeCliente = ko.observable("Nome do Cliente");
-  //Array com todas as inormações dos clientes.
-  this.clientes = ko.observableArray([
-    {
-      "title" : "Black Knight Studio BR",
-      "desc" : "Agência de marketing digital.",
-      "location" : {lat: -21.4740523 , lng: -47.0034376},
-      "end" : "Rua Recife, 149, Mococa-SP.",
-      "cel" : "(19)99194-4298",
-      "tel" : "(19)3656-2178"
-    },
-    {
-      "title" : "Clebinarius Social Estudio",
-      "desc" : "Estudio de piercings em Mococa.",
-      "location" : {lat: -21.4659485 , lng: -47.000363 },
-      "end" : "Rua Recife, 149, Mococa-SP.",
-      "cel" : "(19)99194-4298",
-      "tel" : "(19)3656-2178"
-    },
-    {
-      "title" : "Pisani Inovações",
-      "desc" : "Inovações em pintura e texturização.",
-      "location" : {lat: -21.4490099 , lng: -47.0121738},
-      "end" : "Rua Recife, 149, Mococa-SP.",
-      "cel" : "(19)99194-4298",
-      "tel" : "(19)3656-2178"
-    },
-    {
-      "title" : "Fábio Celulares",
-      "desc" : "Conserto, peças e serviços para o seu celular ou tablet.",
-      "location" : {lat: -21.4657949 , lng: -47.0141764},
-      "end" : "Rua Recife, 149, Mococa-SP.",
-      "cel" : "(19)99194-4298",
-      "tel" : "(19)3656-2178"
-    },
-    {
-      "title" : "Açougue São Domingos",
-      "desc" : "Casa de carnes do Tião Nicola.",
-      "location" : {lat: -21.4571339 , lng: -47.005603},
-      "end" : "Rua Recife, 149, Mococa-SP.",
-      "cel" : "(19)99194-4298",
-      "tel" : "(19)3656-2178"
-    },
-    {
-      "title" : "Clinica Wilson Saboya Brito Filho",
-      "desc" : "Clinica de ginecologia.",
-      "location" : {lat: -21.4740523 , lng: -47.0034376},
-      "end" : "Rua Recife, 149, Mococa-SP.",
-      "cel" : "(19)99194-4298",
-      "tel" : "(19)3656-2178"
-    }
-  ]);
+var clientes = [
+  {
+    "name" : "Black Knight Studio BR",
+    "desc" : "Agência de marketing digital.",
+    "location" : {lat: -21.4740523 , lng: -47.0034376},
+    "end" : "Rua Recife, 149, Mococa-SP.",
+    "cel" : "(19)99194-4298",
+    "tel" : "(19)3656-2178"
+  },
+  {
+    "name" : "Clebinarius Social Estudio",
+    "desc" : "Estudio de piercings em Mococa.",
+    "location" : {lat: -21.4659485 , lng: -47.000363 },
+    "end" : "Rua Recife, 149, Mococa-SP.",
+    "cel" : "(19)99194-4298",
+    "tel" : "(19)3656-2178"
+  },
+  {
+    "name" : "Pisani Inovações",
+    "desc" : "Inovações em pintura e texturização.",
+    "location" : {lat: -21.4490099 , lng: -47.0121738},
+    "end" : "Rua Recife, 149, Mococa-SP.",
+    "cel" : "(19)99194-4298",
+    "tel" : "(19)3656-2178"
+  },
+  {
+    "name" : "Fábio Celulares",
+    "desc" : "Conserto, peças e serviços para o seu celular ou tablet.",
+    "location" : {lat: -21.4657949 , lng: -47.0141764},
+    "end" : "Rua Recife, 149, Mococa-SP.",
+    "cel" : "(19)99194-4298",
+    "tel" : "(19)3656-2178"
+  },
+  {
+    "name" : "Açougue São Domingos",
+    "desc" : "Casa de carnes do Tião Nicola.",
+    "location" : {lat: -21.4571339 , lng: -47.005603},
+    "end" : "Rua Recife, 149, Mococa-SP.",
+    "cel" : "(19)99194-4298",
+    "tel" : "(19)3656-2178"
+  },
+  {
+    "name" : "Clinica Wilson Saboya Brito Filho",
+    "desc" : "Clinica de ginecologia.",
+    "location" : {lat: -21.4740523 , lng: -47.0034376},
+    "end" : "Rua Recife, 149, Mococa-SP.",
+    "cel" : "(19)99194-4298",
+    "tel" : "(19)3656-2178"
+  }
+];
 
-  this.loadData = function() {
+var AppViewModel = {
+  query : ko.observable(''),
+  //Área de dados.
+  nomeCliente : ko.observable("Pesquisa wikipedia links."),
+  //Array com todas as inormações dos clientes.
+  clientes : ko.observableArray([]),
+
+  search : function(value) {
+    AppViewModel.clientes.removeAll();
+
+   if (value == '') return;
+
+   for (var cliente in clientes) {
+     if (clientes[cliente].name.toLowerCase().indexOf(value.toLowerCase()) >= 0) {
+       AppViewModel.clientes.push(clientes[cliente]);
+     }
+   }
+ },
+
+
+  loadData : function() {
       var $wikiElem = $('#wikipedia-links');
       //Limpa o cabeçalho da pesquisa. Recupera o valor de texto inserido pelo usuário.
       //Repõe o cabeçalho com o valor incluso pelo usuário.
@@ -84,6 +99,7 @@ function AppViewModel(){
       });
 
       return false;
-  };
+  },
 };
-ko.applyBindings(new AppViewModel());
+AppViewModel.query.subscribe(AppViewModel.search);
+ko.applyBindings(AppViewModel);
