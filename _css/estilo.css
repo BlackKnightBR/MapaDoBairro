@@ -100,7 +100,7 @@ nav #wikipedia-links {
 
 @media screen and (max-width: 500px) {
   #map {
-    top: 800px;
+    top: 675px;
     left: 0px;
     height: 100%;
     max-width: 100%;
@@ -109,5 +109,6 @@ nav #wikipedia-links {
 
    .caixa {
      max-width: 100%;
+     max-height: 250px;
    }
 }
