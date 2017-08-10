@@ -1,3 +1,4 @@
+//Área de dados.
 var clientes = [
   {
     "name" : "Black Knight Studio BR",
@@ -51,16 +52,14 @@ var clientes = [
 
 var AppViewModel = {
   query : ko.observable(''),
-  //Área de dados.
-  nomeCliente : ko.observable("Pesquisa wikipedia links."),
+  nomeCliente : ko.observable(''),
   //Array com todas as inormações dos clientes.
   clientes : ko.observableArray([]),
 
   search : function(value) {
-    AppViewModel.clientes.removeAll();
-
-   if (value == '') return;
-
+  //Limpa os clientes.
+  AppViewModel.clientes.removeAll();
+  //Exibe o cliente selecionado na caixa de busca.
    for (var cliente in clientes) {
      if (clientes[cliente].name.toLowerCase().indexOf(value.toLowerCase()) >= 0) {
        AppViewModel.clientes.push(clientes[cliente]);
