@@ -21,7 +21,12 @@
 			Botão Info: adiciona links do wikipedia sobre o cliente selecionado na caixa de texto, funciona com qualquer item de pesquisa.
 		���
 	###Objetivo:###
-		** Completar o nanodegree front-end udacity** 
+		** Completar o nanodegree front-end udacity**
+
+###Api:###
+
+	**Google Maps.**
+	**Wikipedia relevant links.**  
 
 ###Agradecimentos:###
 	A comunidade online JavaScript, aos colegas das turmas Udacity e o corretor por resolver muitas de minhas duvidas
