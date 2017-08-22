@@ -58,30 +58,30 @@ nav #wikipedia-links {
  }
 
 .caixa {
-   max-height: 210px;
+   max-height: 200px;
    border: 1px solid black;
    max-width: 300px;
-   padding: 10px;
+   padding: 8px;
    border-radius: 8px;
    font-family: 'Roboto', sans-serif;
    background-color: lightgrey;
 }
 
 .caixaClientes {
+   max-height: 200px;
    border: 1px solid black;
    max-width: 300px;
-   padding: 10px;
+   padding: 8px;
    border-radius: 10px;
    font-family: 'Roboto Condensed', sans-serif;
    background-color: white;
-   max-height: 200px;
 }
 
 .container {
    max-width: 100%;
 }
 
-#clientesBox #listaClientes {
+#listaClientes {
   overflow:hidden;
   overflow-y:scroll;
 }
@@ -93,7 +93,12 @@ nav #wikipedia-links {
 @media screen and (min-width: 501px) and (max-width: 800px) {
   .caixa{
     max-width: 214px;
+    max-height: 235px;
   }
+
+  .caixaClientes {
+     max-height: 178px;
+   }
 
   #clientesBox{
     max-width: 235px;
