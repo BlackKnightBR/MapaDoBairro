@@ -174,6 +174,10 @@
       //Requisição Ajax para api wikipedia.
       $.ajax(wikiUrl,{
         dataType: "jsonp",
+        error: function (request) {
+            alert(request.responseText);
+            event.preventDefault();
+        },
         success: function(response){
           var articleList = response[1];
           //Cria uma lista dos links relevantes da Wikipedia sobre o lugar.
@@ -243,4 +247,8 @@
       new google.maps.Point(10, 34),
       new google.maps.Size(21,34));
     return markerImage;
+  }
+
+  function googleError(){
+    document.getElementById('map').append("ERRO: Api Google Maps");
   }
