@@ -67,38 +67,12 @@ var AppViewModel = {
    }
  },
 
-
-  loadData : function() {
-      var $wikiElem = $('#wikipedia-links');
-      //Limpa o cabeçalho da pesquisa. Recupera o valor de texto inserido pelo usuário.
-      //Repõe o cabeçalho com o valor incluso pelo usuário.
-      $wikiElem.text("");
-      var place = $('#user-input').val();
-      $wikiElem.text(place);
-
-
-      //Url de solicitação e definição do timeout de resposta ajax.
-      var wikiUrl = 'http://en.wikipedia.org/w/api.php?action=opensearch&search=' + place + '&format=json&callback=wikiCallback';
-      var wikiRequestTimeout = setTimeout(function(){$wikiElem.text("failed to get wikipedia resources")},8000);
-
-      //Requisição Ajax para api wikipedia.
-      $.ajax(wikiUrl,{
-        dataType: "jsonp",
-        success: function(response){
-          var articleList = response[1];
-          //Cria uma lista dos links relevantes da Wikipedia sobre o lugar.
-          for(var i = 0; i < articleList.length; i++){
-            articleStr = articleList[i];
-            var url = 'http://en.wikipedia.org/wiki/' + articleStr;
-            $wikiElem.append('<li><a href="' + url + '">"' + articleStr + '</a></li>');
-          };
-          //Quando existe resposta "limpa" o limite de tempo para resposta.
-          clearTimeout(wikiRequestTimeout);
-        }
-      });
-
-      return false;
-  },
+ initList : function(){
+   for(var i=0; i < clientes.length; i++){
+      AppViewModel.clientes.push(clientes[i]);
+   }
+ },
 };
 AppViewModel.query.subscribe(AppViewModel.search);
 ko.applyBindings(AppViewModel);
+AppViewModel.initList();

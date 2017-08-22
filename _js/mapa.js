@@ -141,7 +141,8 @@
           var nearStreetViewLocation = data.location.latLng;
           var heading = google.maps.geometry.spherical.computeHeading(
             nearStreetViewLocation, marker.position);
-            infowindow.setContent('<div>' + marker.title + '</div><div id="pano"></div>');
+            infowindow.setContent('<div>' + marker.title + '</div><div id="pano"></div><div><nav>' +
+              '<ul id="wikipedia">Wikipedia Links</ul></nav></div>');
             var panoramaOptions = {
               position: nearStreetViewLocation,
               pov: {
@@ -151,6 +152,7 @@
             };
           var panorama = new google.maps.StreetViewPanorama(
             document.getElementById('pano'), panoramaOptions);
+            loadWiki(marker.title);
         } else {
           infowindow.setContent('<div>' + marker.title + '</div>' +
             '<div>No Street View Found</div>');
@@ -159,6 +161,35 @@
       streetViewService.getPanoramaByLocation(marker.position, radius, getStreetView);
       infowindow.open(map, marker);
     }
+  }
+
+  //Busca por links da wikipedia.
+  function loadWiki(value) {
+      var $wikiElem = $('#wikipedia');
+      var place = value;
+      //Url de solicitação e definição do timeout de resposta ajax.
+      var wikiUrl = 'http://en.wikipedia.org/w/api.php?action=opensearch&search=' + place + '&format=json&callback=wikiCallback';
+      var wikiRequestTimeout = setTimeout(function(){$wikiElem.text("failed to get wikipedia resources")},8000);
+
+      //Requisição Ajax para api wikipedia.
+      $.ajax(wikiUrl,{
+        dataType: "jsonp",
+        success: function(response){
+          var articleList = response[1];
+          //Cria uma lista dos links relevantes da Wikipedia sobre o lugar.
+          for(var i = 0; i < articleList.length; i++){
+            articleStr = articleList[i];
+            var url = 'http://en.wikipedia.org/wiki/' + articleStr;
+            $wikiElem.append('<li><a href="' + url + '">"' + articleStr + '</a></li>');
+          };
+          //Quando existe resposta "limpa" o limite de tempo para resposta.
+          clearTimeout(wikiRequestTimeout);
+          if(document.getElementById('wikipedia').childNodes.length <= 1){
+            $wikiElem.append('<li>Nada a exibir</li>');
+          }
+        }
+      });
+      return false;
   }
 
   //Função que adiciona o array de marcadores ao mapa.

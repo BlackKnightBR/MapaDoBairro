@@ -39,10 +39,11 @@ nav #wikipedia-links {
 #map {
    height: 100%;
    bottom: 0px;
-   left: 362px;
+   left: 322px;
    position: absolute;
    right: 0px;
-   max-width: 70%;
+   max-width: 90%;
+   border: 1px solid black;
  }
 
 .options-box {
@@ -59,7 +60,7 @@ nav #wikipedia-links {
 .caixa {
    max-height: 210px;
    border: 1px solid black;
-   max-width: 340px;
+   max-width: 300px;
    padding: 10px;
    border-radius: 8px;
    font-family: 'Roboto', sans-serif;
@@ -89,26 +90,27 @@ nav #wikipedia-links {
    list-style: none;
 }
 
-#sideBar {
-   max-width: 30%;
+@media screen and (min-width: 501px) and (max-width: 800px) {
+  .caixa{
+    max-width: 240px;
+  }
+
+  #clientesBox{
+    max-width: 260px;
+  }
+
+  #map {
+    left: 265px;
+  }
+
 }
 
-#referenciaMobile{
-  display: none;
-  list-style: none;
-}
 
 @media screen and (max-width: 500px) {
   #map {
-    top: 675px;
+    top: 480px;
     left: 0px;
     height: 100%;
     max-width: 100%;
-    border: 1px solid black;
-   }
-
-   .caixa {
-     max-width: 100%;
-     max-height: 250px;
    }
 }

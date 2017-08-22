@@ -15,24 +15,12 @@
         <div>
           <input id="show-listings" type="button" value="Marcadores">
           <input id="hide-listings" type="button" value="Esconder Marcadores">
-
-          <input id="search" type="search" name="search" placeholder="Pesquisa por clientes" data-bind="value: query, valueUpdate: 'keyup'" autocomplete="off" />
+          <input id="search" type="search" name="search" placeholder="Mostrar Cliente" data-bind="value: query, valueUpdate: 'keyup'" autocomplete="off" />
           <button id="search-input"> Mostrar </button>
-          <input id="user-input"   placeholder="Pesquisa wikipedia links." data-bind="value: nomeCliente" >
-          <button id="info-input" data-bind="click: loadData"> Info </button>
           <hr>
         </div>
       </div>
     </div>
-    <div class="caixa">
-      <div class="wikipedia-container">
-          <h3 id="wikipedia-header">Wikipedia links sobre clientes.</h3>
-          <nav>
-            <ul id="wikipedia-links">Escolha o nome de um dos clientes no mapa e click info.</ul>
-          </nav>
-      </div>
-    </div>
-      <div>
         <nav id="clientesBox">
           <ul  id="listaClientes" class="caixaClientes" data-bind="template: {foreach:clientes}">
               <li>
@@ -44,18 +32,16 @@
                 <hr>
               </li>
           </ul>
-        <nav>
-      </div>
+        </nav>
       <div id="map"></div>
-    </div>
 
     <script src="_js/lib/knockout-3.4.2.js"></script>
     <script src="_js/lib/jquery.min.js"></script>
     <script src="_js/app.js"></script>
+    <script src="_js/mapa.js"></script>
     <script async defer
         src=
         "https://maps.googleapis.com/maps/api/js?libraries=geometry,drawing&key=AIzaSyDsz4DlbTdx0_9XyYSvq7qMK40yDeUD8nE&v=3&callback=initMap" onerror="googleError()">
     </script>
-    <script src="_js/mapa.js"></script>
   </body>
 </html>
