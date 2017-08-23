@@ -13,17 +13,17 @@
         <img id="logoBKSBR" src="_imagens/LogoNovo(1).png" alt="Logo da empresa Black Knight Studio BR">
       </figure>
         <div>
-          <input id="show-listings" type="button" value="Marcadores">
-          <input id="hide-listings" type="button" value="Esconder Marcadores">
+          <input id="show-listings" type="button" value="Marcadores" data-bind="click: AppViewModel.listar">
+          <input id="hide-listings" type="button" value="Esconder Marcadores" data-bind="click: AppViewModel.esconderListagem">
           <input id="search" type="search" name="search" placeholder="Mostrar Cliente" data-bind="value: query, valueUpdate: 'keyup'" autocomplete="off" />
-          <button id="search-input"> Mostrar </button>
+          <button id="search-input" data-bind="click: AppViewModel.marcarCliente"> Mostrar </button>
           <hr>
         </div>
       </div>
     </div>
         <nav id="clientesBox">
           <ul  id="listaClientes" class="caixaClientes" data-bind="template: {foreach:clientes}">
-              <li>
+              <li data-bind="click: AppViewModel.mostrarClienteComClick.bind($data,name)">
                 <h3 data-bind="text: name"></h3>
                 <p data-bind="text: desc"></p>
                 <p data-bind="text: end"></p>
@@ -37,8 +37,8 @@
 
     <script src="_js/lib/knockout-3.4.2.js"></script>
     <script src="_js/lib/jquery.min.js"></script>
-    <script src="_js/app.js"></script>
     <script src="_js/mapa.js"></script>
+    <script src="_js/app.js"></script>
     <script async defer
         src=
         "https://maps.googleapis.com/maps/api/js?libraries=geometry,drawing&key=AIzaSyDsz4DlbTdx0_9XyYSvq7qMK40yDeUD8nE&v=3&callback=initMap" onerror="googleError()">

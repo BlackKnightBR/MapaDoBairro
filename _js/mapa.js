@@ -8,7 +8,7 @@
     {title: 'Pisani Inovações', location: {lat: -21.4490099 , lng: -47.0121738}},
     {title: 'Fábio Celulares', location: {lat: -21.4657949 , lng: -47.0141764}},
     {title: 'Açougue São Domingos', location: {lat: -21.4571339 , lng: -47.005603}},
-    {title: 'Clinica Wilson Saboya Brito Filho', location: {lat: -21.4740523 , lng: -47.0034376}}
+    {title: 'Clinica Wilson Saboya Brito Filho', location: {lat: -21.46497088 , lng: -47.00775683}}
   ];
 
 
@@ -117,10 +117,7 @@
       });
     }
 
-    //Cria conexão dos botões e suas funções.
-    document.getElementById('show-listings').addEventListener('click', showListings);
-    document.getElementById('hide-listings').addEventListener('click', hideListings);
-    document.getElementById('search-input').addEventListener('click', mostrarCliente);
+    //Carrega todos marcadores para exibição.
     showListings();
   }
 
@@ -158,6 +155,7 @@
             '<div>No Street View Found</div>');
         }
       }
+
       streetViewService.getPanoramaByLocation(marker.position, radius, getStreetView);
       infowindow.open(map, marker);
     }
@@ -174,8 +172,8 @@
       //Requisição Ajax para api wikipedia.
       $.ajax(wikiUrl,{
         dataType: "jsonp",
-        error: function (request) {
-            alert(request.responseText);
+        error: function () {
+            alert("Houve um problema com a Wikipedia.");
             event.preventDefault();
         },
         success: function(response){
@@ -238,6 +236,28 @@
     }
   }
 
+  function mostrarClienteLista(value) {
+    var nome = value;
+    var todosClientes = locations;
+    hideListings();
+    for(var i = 0; i < todosClientes.length; i++){
+      if(todosClientes[i].title === nome){
+        var LInfowindow = new google.maps.InfoWindow();
+        marker = new google.maps.Marker({
+          position: todosClientes[i].location,
+          title: todosClientes[i].title,
+          animation: google.maps.Animation.DROP,
+        });
+        map.setCenter(marker.position);
+        map.setZoom(15);
+        marker.setMap(map);
+        marker.addListener('click', function() {
+          populateInfoWindow(this, LInfowindow);
+        });
+      }
+    }
+  }
+
   function makeMarkerIcon(markerColor) {
     var markerImage = new google.maps.MarkerImage(
       'http://chart.googleapis.com/chart?chst=d_map_spin&chld=1.15|0|'+ markerColor +
@@ -250,5 +270,5 @@
   }
 
   function googleError(){
-    document.getElementById('map').append("ERRO: Api Google Maps");
+    alert("ERRO: Api Google Maps");
   }

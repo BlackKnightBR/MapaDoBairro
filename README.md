@@ -14,11 +14,11 @@
 
 	####Features:### 
 		���
-			Botão Marcadores: exibe todos os clientes que atualmente trabalham com a BKS-BR.
-			Botão Esconder Marcadores: remove todos os marcadores do mapa (mesmo marcadores únicos).
-			Input de texto: usado para selecionar o cliente que se deseja obter mais informações.
-			Botão Mostrar: adiciona o marcador único ao mapa com informações extras sobre aquele determinado cliente.
-			Botão Info: adiciona links do wikipedia sobre o cliente selecionado na caixa de texto, funciona com qualquer item de pesquisa.
+			Botão Marcadores: Exibe todos os clientes que atualmente trabalham com a BKS-BR.
+			Botão Esconder Marcadores: Remove todos os marcadores do mapa (mesmo marcadores únicos).
+			Input de texto: Usado para selecionar o cliente que se deseja obter mais informações.
+			Botão Mostrar: Adiciona o marcador único ao mapa com informações extras sobre aquele determinado cliente.
+			Lista de clientes: Ao clicar em um dos campos de cliente exibe o marcador expecífico daquele cliente.
 		���
 	###Objetivo:###
 		** Completar o nanodegree front-end udacity**
