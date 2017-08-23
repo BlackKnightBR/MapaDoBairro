@@ -22,7 +22,7 @@
     </div>
         <nav id="clientesBox">
           <ul  id="listaClientes" class="caixaClientes" data-bind="template: {foreach:clientes}">
-              <li data-bind="click: AppViewModel.mostrarClienteComClick.bind($data,name)">
+              <li data-bind="click: AppViewModel.mostrarClienteComClick.bind($data,index)">
                 <h3 data-bind="text: name"></h3>
                 <p data-bind="text: desc"></p>
                 <p data-bind="text: end"></p>

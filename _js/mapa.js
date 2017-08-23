@@ -216,32 +216,49 @@
   var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
         var icon = iconBase + 'info-i_maps.png';
 
-  //Adiciona um marcador especifico do cliente selecionado pelo usuário.
-  function mostrarClienteLista(value) {
-    var nome = value;
-    var todosClientes = locations;
-    hideListings();
-    for(var i = 0; i < todosClientes.length; i++){
-      if(todosClientes[i].title === nome){
-        var LInfowindow = new google.maps.InfoWindow();
-        marker = new google.maps.Marker({
-          position: todosClientes[i].location,
-          title: todosClientes[i].title,
-          //Altera os icones para a infowindow dos clientes.
-          icon: icon,
-          //Animação do marcador.
-          animation: google.maps.Animation.DROP,
-        });
-        map.setCenter(marker.position);
-        map.setZoom(15);
-        marker.setMap(map);
-        marker.addListener('click', function() {
-          populateInfoWindow(this, LInfowindow);
-        });
-        openInfoWindow(marker,LInfowindow);
-      }
-    }
-  }
+  //Função a qual anima o marcador e abre a infowindow.
+  //Quando a infowindow é fechada desativa a animação.
+  function mostrarInfoWindow(index) {
+    var defaultIcon = makeMarkerIcon('0091ff');
+    var LInfowindow = new google.maps.InfoWindow();
+    markers[index].setIcon(icon);
+    markers[index].setAnimation(google.maps.Animation.BOUNCE);
+    map.setCenter(markers[index].position);
+    map.setZoom(15);
+    openInfoWindow(markers[index],LInfowindow);
+    google.maps.event.addListener(LInfowindow,'closeclick',function(){
+      markers[index].setAnimation(null);
+      markers[index].setIcon(defaultIcon);
+    });
+  };
+
+  //Metódo obsoleto.
+  // //Adiciona um marcador especifico do cliente selecionado pelo usuário.
+  // function mostrarClienteLista(value) {
+  //   var nome = value;
+  //   var todosClientes = locations;
+  //   hideListings();
+  //   for(var i = 0; i < todosClientes.length; i++){
+  //     if(todosClientes[i].title === nome){
+  //       var LInfowindow = new google.maps.InfoWindow();
+  //       marker = new google.maps.Marker({
+  //         position: todosClientes[i].location,
+  //         title: todosClientes[i].title,
+  //         //Altera os icones para a infowindow dos clientes.
+  //         icon: icon,
+  //         //Animação do marcador.
+  //         animation: google.maps.Animation.DROP,
+  //       });
+  //       map.setCenter(marker.position);
+  //       map.setZoom(15);
+  //       marker.setMap(map);
+  //       marker.addListener('click', function() {
+  //         populateInfoWindow(this, LInfowindow);
+  //       });
+  //       openInfoWindow(marker,LInfowindow);
+  //     }
+  //   }
+  // }
   //Função que abre a janela de informações assim que a lista é clickada.
   function openInfoWindow(marker, infowindow){
     populateInfoWindow(marker, infowindow);
