@@ -17,7 +17,8 @@
 			Botão Marcadores: Exibe todos os clientes que atualmente trabalham com a BKS-BR.
 			Botão Esconder Marcadores: Remove todos os marcadores do mapa (mesmo marcadores únicos).
 			Input de texto: Usado para filtrar a lista de clientes.
-			Lista de clientes: Ao clicar em um dos campos de cliente exibe o marcador expecífico daquele cliente.
+			Lista de clientes: Ao clicar em um dos campos de cliente exibe o marcador expecífico daquele cliente 
+				e abre a janela de informações específica do cliente.
 		���
 	###Objetivo:###
 		** Completar o nanodegree front-end udacity**

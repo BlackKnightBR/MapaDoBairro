@@ -213,7 +213,10 @@
     }
   }
 
-//Adiciona um marcador especifico do cliente selecionado pelo usuário.
+  var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
+        var icon = iconBase + 'info-i_maps.png';
+
+  //Adiciona um marcador especifico do cliente selecionado pelo usuário.
   function mostrarClienteLista(value) {
     var nome = value;
     var todosClientes = locations;
@@ -224,6 +227,9 @@
         marker = new google.maps.Marker({
           position: todosClientes[i].location,
           title: todosClientes[i].title,
+          //Altera os icones para a infowindow dos clientes.
+          icon: icon,
+          //Animação do marcador.
           animation: google.maps.Animation.DROP,
         });
         map.setCenter(marker.position);
@@ -232,8 +238,14 @@
         marker.addListener('click', function() {
           populateInfoWindow(this, LInfowindow);
         });
+        openInfoWindow(marker,LInfowindow);
       }
     }
+  }
+  //Função que abre a janela de informações assim que a lista é clickada.
+  function openInfoWindow(marker, infowindow){
+    populateInfoWindow(marker, infowindow);
+    infowindow.open(map, marker);
   }
 
   function makeMarkerIcon(markerColor) {
