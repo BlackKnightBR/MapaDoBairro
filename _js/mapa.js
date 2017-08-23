@@ -213,29 +213,7 @@
     }
   }
 
-  //Adiciona um marcador especifico do cliente selecionado pelo usuário.
-  function mostrarCliente() {
-    var nome = document.getElementById('search').value;
-    var todosClientes = locations;
-    hideListings();
-    for(var i = 0; i < todosClientes.length; i++){
-      if(todosClientes[i].title === nome){
-        var LInfowindow = new google.maps.InfoWindow();
-        marker = new google.maps.Marker({
-          position: todosClientes[i].location,
-          title: todosClientes[i].title,
-          animation: google.maps.Animation.DROP,
-        });
-        map.setCenter(marker.position);
-        map.setZoom(15);
-        marker.setMap(map);
-        marker.addListener('click', function() {
-          populateInfoWindow(this, LInfowindow);
-        });
-      }
-    }
-  }
-
+//Adiciona um marcador especifico do cliente selecionado pelo usuário.
   function mostrarClienteLista(value) {
     var nome = value;
     var todosClientes = locations;
